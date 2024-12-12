@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Center, Box } from '@chakra-ui/react';
+import { Center, Box, Flex, Span, Icon, Button } from '@chakra-ui/react';
+import { FaCirclePlay, FaCirclePause, FaArrowRotateLeft } from "react-icons/fa6";
 
 const Stopwatch = () => {
   const [isActive, setIsActive] = useState(false);
@@ -37,43 +38,53 @@ const Stopwatch = () => {
   };
 
   const StartButton = (
-    <div className="btn btn-one btn-start"
-      onClick={handleStart}>
-      Start
+    <div>
+      {/* <Box fontSize="32px">&nbsp;</Box> */}
+      <div>
+        <Icon fontSize="40px" marginBlock="10px" color="red"><FaArrowRotateLeft /></Icon>
+      </div>
+      <Button className=""
+        onClick={handleStart}>
+        Start Focus Session
+      </Button>
     </div>
   );
   const ActiveButtons = (
-    <div className="btn-grp">
-      <div className="btn btn-two"
+    <div>
+      <Flex className="btn btn-one" onClick={handlePauseResume} justifyContent="center" marginBottom="10px">
+        <Icon fontSize="40px" marginRight="20px">{isPaused ? <FaCirclePlay /> : <FaCirclePause />}</Icon>
+        <Icon fontSize="40px">
+          <FaArrowRotateLeft />
+        </Icon>
+      </Flex>
+      <Button className=""
         onClick={handleReset}>
-        Reset
-      </div>
-      <div className="btn btn-one"
-        onClick={handlePauseResume}>
-        {isPaused ? "Resume" : "Pause"}
-      </div>
+        End Focus Session
+      </Button>
     </div>
   );
 
   return (
-    <Box>
+    <Flex gap="4" justify="center" height="100%" alignItems="center" direction="column">
       <div className="timer">
         <div>
-          <span className="digits">
+          {/* {time}<br/> */}
+          <Span textStyle="6xl" fontFamily='"M PLUS Rounded 1c", sans-serif' fontWeight="800">
             {("0" + Math.floor((time / 60000) % 60)).slice(-2)}:
-          </span>
-          <span className="digits">
-            {("0" + Math.floor((time / 1000) % 60)).slice(-2)}.
-          </span>
-          <span className="digits mili-sec">
+          </Span>
+          <Span textStyle="6xl" fontFamily='"M PLUS Rounded 1c", sans-serif' fontWeight="800">
+            {("0" + Math.floor((time / 1000) % 60)).slice(-2)}
+          </Span>
+          {/* <span className="digits">
             {("0" + ((time / 10) % 100)).slice(-2)}
-          </span>
+          </span> */}
         </div>
       </div>
       <div className="Control-Buttons">
+
         <div>{isActive ? ActiveButtons : StartButton}</div>
       </div>
-    </Box>
+    </Flex>
   );
 };
 

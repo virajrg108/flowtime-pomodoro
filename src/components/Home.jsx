@@ -102,7 +102,7 @@ const Home = props => {
         </Tabs.List>
         <Tabs.Content value="flowtime" bg="cyan.200">
           <Grid height="90vh" templateRows="repeat(8, 2fr)" gap="2">
-            <GridItem rowSpan={3}>
+            <GridItem rowSpan={4}>
               <Table.ScrollArea borderWidth="1px" rounded="md" height="100%">
                 <Table.Root size="sm" variant="outline" stickyHeader striped _even={{ backgroundColor: 'red' }}>
                   <Table.Header bg="transparent">
@@ -126,7 +126,7 @@ const Home = props => {
                 </Table.Root>
               </Table.ScrollArea>
             </GridItem>
-            <GridItem rowSpan={5} bg="cyan.299">
+            <GridItem rowSpan={4} bg="cyan.299">
               <Stopwatch/>
             </GridItem>
           </Grid>
