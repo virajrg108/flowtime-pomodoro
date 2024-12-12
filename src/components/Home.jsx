@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Link, GridItem, Grid, Table } from '@chakra-ui/react';
+import { Tabs, Link, GridItem, Grid, Table, Center } from '@chakra-ui/react';
+import Stopwatch from './Stopwatch';
 
 const tableData = [
   {
@@ -125,8 +126,8 @@ const Home = props => {
                 </Table.Root>
               </Table.ScrollArea>
             </GridItem>
-            <GridItem rowSpan={5} bg="red">
-              Hi
+            <GridItem rowSpan={5} bg="cyan.299">
+              <Stopwatch/>
             </GridItem>
           </Grid>
         </Tabs.Content>
