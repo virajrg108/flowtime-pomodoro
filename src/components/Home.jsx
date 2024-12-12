@@ -87,52 +87,35 @@ const tableData = [
 const Home = props => {
   return (
     <div>
-      <Tabs.Root variant="line" height="90vh" fitted defaultValue="flowtime">
-        <Tabs.List>
-          <Tabs.Trigger value="flowtime" asChild>
-            <Link unstyled href="#flowtime">
-              FlowTime
-            </Link>
-          </Tabs.Trigger>
-          <Tabs.Trigger value="history-tab" asChild>
-            <Link unstyled href="#history-tab">
-              History
-            </Link>
-          </Tabs.Trigger>
-        </Tabs.List>
-        <Tabs.Content value="flowtime" bg="cyan.200">
-          <Grid height="90vh" templateRows="repeat(8, 2fr)" gap="2">
-            <GridItem rowSpan={4}>
-              <Table.ScrollArea borderWidth="1px" rounded="md" height="100%">
-                <Table.Root size="sm" variant="outline" stickyHeader striped _even={{ backgroundColor: 'red' }}>
-                  <Table.Header bg="transparent">
-                    <Table.Row>
-                      <Table.ColumnHeader >Activity</Table.ColumnHeader>
-                      <Table.ColumnHeader minW="4px">Duration</Table.ColumnHeader>
-                      <Table.ColumnHeader minW="4px">Start</Table.ColumnHeader>
-                      <Table.ColumnHeader minW="4px">End</Table.ColumnHeader>
-                    </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
-                    {tableData.map((item) => (
-                      <Table.Row key={item.id}>
-                        <Table.Cell maxW="180px" overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">{item.activity}</Table.Cell>
-                        <Table.Cell>{item.duration}</Table.Cell>
-                        <Table.Cell>{item.start}</Table.Cell>
-                        <Table.Cell>{item.end}</Table.Cell>
-                      </Table.Row>
-                    ))}
-                  </Table.Body>
-                </Table.Root>
-              </Table.ScrollArea>
-            </GridItem>
-            <GridItem rowSpan={4} bg="cyan.299">
-              <Stopwatch/>
-            </GridItem>
-          </Grid>
-        </Tabs.Content>
-        <Tabs.Content value="history-tab">Manage your projects</Tabs.Content>
-      </Tabs.Root>
+      <Grid height="90vh" templateRows="repeat(8, 2fr)" gap="2">
+        <GridItem rowSpan={3} bg="cyan.299">
+          <Stopwatch />
+        </GridItem>
+        <GridItem rowSpan={5}>
+          <Table.ScrollArea borderWidth="1px" rounded="md" height="100%">
+            <Table.Root size="sm" variant="outline" stickyHeader striped _even={{ backgroundColor: 'red' }}>
+              <Table.Header bg="transparent">
+                <Table.Row>
+                  <Table.ColumnHeader >Activity</Table.ColumnHeader>
+                  <Table.ColumnHeader minW="4px">Duration</Table.ColumnHeader>
+                  <Table.ColumnHeader minW="4px">Start</Table.ColumnHeader>
+                  <Table.ColumnHeader minW="4px">End</Table.ColumnHeader>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {tableData.map((item) => (
+                  <Table.Row key={item.id}>
+                    <Table.Cell maxW="180px" overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">{item.activity}</Table.Cell>
+                    <Table.Cell>{item.duration}</Table.Cell>
+                    <Table.Cell>{item.start}</Table.Cell>
+                    <Table.Cell>{item.end}</Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table.Root>
+          </Table.ScrollArea>
+        </GridItem>
+      </Grid>
     </div>
   );
 };
