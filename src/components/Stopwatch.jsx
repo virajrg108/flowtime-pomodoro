@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import { Center, Box, Flex, Span, Icon, Button, Input } from '@chakra-ui/react';
 import { FaCirclePlay, FaCirclePause, FaArrowRotateLeft } from "react-icons/fa6";
 
-const Stopwatch = () => {
+
+//FIXME: Stopwatch only starts when the tab is open 
+const Stopwatch = (props) => {
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const [time, setTime] = useState(0);
+  const [sessionType, setSessionType] = useState('focus');
   const inputRef = useRef();
+  const minRef = useRef();
+  const secRef = useRef();
 
   React.useEffect(() => {
     let interval = null;
@@ -24,7 +29,8 @@ const Stopwatch = () => {
     };
   }, [isActive, isPaused]);
 
-  const handleStart = () => {
+  const handleStart = (breakType) => {
+    setSessionType(breakType);
     setIsActive(true);
     setIsPaused(false);
   };
@@ -38,12 +44,19 @@ const Stopwatch = () => {
   }
 
   const handleReset = (...args) => {
-    if(args.length>0) {
+    let d = new Date();
+    if (args.length > 0) {
       console.log("record session");
-      console.log("Duration: ", );
+      console.log("Duration: ",);
       console.log("Activity Name: ", inputRef.current.value);
       console.log("Start Time: ", new Date());
-      console.log("Duration: ", );
+      console.log("Duration: ", secRef.current.textContent);
+      props.addNewSession({
+        min: minRef.current.textContent.slice(0, -1),
+        sec: secRef.current.textContent,
+        activity:inputRef.current.value,
+        date: d.getDate()+'-'+d.getMonth()+'-'+d.getFullYear(),
+      });
     }
     setIsActive(false);
     setTime(0);
@@ -53,9 +66,11 @@ const Stopwatch = () => {
   const StartButton = (
     <div>
       {/* <Box fontSize="32px">&nbsp;</Box> */}
-      <Button
-        onClick={handleStart}>
+      <Button onClick={() => handleStart('focus')} marginRight="10px" bg="cyan.700">
         Start Focus Session
+      </Button>
+      <Button onClick={() => handleStart('break')} bg="red.800">
+        Start Break Session
       </Button>
       <Flex justifyContent="center" marginTop="20px">
         <Icon fontSize="40px" color="transparent"><FaArrowRotateLeft /></Icon>
@@ -64,10 +79,16 @@ const Stopwatch = () => {
   );
   const ActiveButtons = (
     <div>
-      <Button
-        onClick={()=>handleReset(true)}>
-        End Focus Session
-      </Button>
+      {sessionType == 'focus' ?
+        <Button
+          onClick={() => handleReset(true)}>
+          End Focus Session
+        </Button> :
+        <Button
+          onClick={() => handleReset(true)}>
+          End Break Session
+        </Button>}
+
       <Flex justifyContent="center" marginTop="20px">
         <Icon onClick={handlePauseResume} fontSize="40px" marginRight="20px">{isPaused ? <FaCirclePlay /> : <FaCirclePause />}</Icon>
         <Icon onClick={handleReset} fontSize="40px"><FaArrowRotateLeft /></Icon>
@@ -80,15 +101,15 @@ const Stopwatch = () => {
       <div className="timer">
         <div>
           {/* {time}<br/> */}
-          <Span textStyle="6xl" fontFamily='"M PLUS Rounded 1c", sans-serif' fontWeight="900">
-            {("0" + Math.floor((time / 60000) % 60)).slice(-2)}:
+          <Span textStyle="6xl" fontFamily='"M PLUS Rounded 1c", sans-serif' fontWeight="900" ref={minRef}>
+            {( Math.floor((time / 60000)))}:
           </Span>
-          <Span textStyle="6xl" fontFamily='"M PLUS Rounded 1c", sans-serif' fontWeight="900">
+          <Span textStyle="6xl" fontFamily='"M PLUS Rounded 1c", sans-serif' fontWeight="900" ref={secRef }>
             {("0" + Math.floor((time / 1000) % 60)).slice(-2)}
           </Span>
-          {/* <span className="digits">
+          <Span textStyle="2xl" marginLeft="5px">
             {("0" + ((time / 10) % 100)).slice(-2)}
-          </span> */}
+          </Span>
         </div>
       </div>
       <Box marginBottom="10px">

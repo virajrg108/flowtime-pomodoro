@@ -85,11 +85,15 @@ const tableData = [
 
 
 const Home = props => {
+  const addNewSession = (obj) => {
+    console.log("Hello")
+    console.log(obj);
+  }
   return (
     <div>
       <Grid height="90vh" templateRows="repeat(8, 2fr)" gap="2">
         <GridItem rowSpan={3} bg="cyan.299">
-          <Stopwatch />
+          <Stopwatch addNewSession={addNewSession} />
         </GridItem>
         <GridItem rowSpan={5}>
           <Table.ScrollArea borderWidth="1px" rounded="md" height="100%">
