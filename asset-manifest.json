@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/flowtime-pomodoro/static/css/main.e6c13ad2.css",
-    "main.js": "/flowtime-pomodoro/static/js/main.6484e5cd.js",
+    "main.js": "/flowtime-pomodoro/static/js/main.c9e85d83.js",
     "service-worker.js": "/flowtime-pomodoro/service-worker.js",
     "index.html": "/flowtime-pomodoro/index.html",
     "main.e6c13ad2.css.map": "/flowtime-pomodoro/static/css/main.e6c13ad2.css.map",
-    "main.6484e5cd.js.map": "/flowtime-pomodoro/static/js/main.6484e5cd.js.map"
+    "main.c9e85d83.js.map": "/flowtime-pomodoro/static/js/main.c9e85d83.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.6484e5cd.js"
+    "static/js/main.c9e85d83.js"
   ]
 }
