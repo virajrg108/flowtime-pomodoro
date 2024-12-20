@@ -130,7 +130,7 @@ const Home = props => {
                   <Table.Row key={item.id}>
                     <Table.Cell maxW="180px" overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">{item.date}</Table.Cell>
                     <Table.Cell>{item.sessionType}</Table.Cell>
-                    <Table.Cell>{item.duration}</Table.Cell>
+                    <Table.Cell>{Math.ceil(item.duration/60).toString()+" min"}</Table.Cell>
                     <Table.Cell>{item.startTime}</Table.Cell>
                   </Table.Row>
                 ))}
