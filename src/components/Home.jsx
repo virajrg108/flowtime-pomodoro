@@ -104,7 +104,6 @@ const Home = props => {
 
   const getAllSessions = async () => {
     let ses = await db.sessions.toArray();
-    await console.log(ses, "Sessions");
     setSessions(ses);
   };
 
@@ -126,7 +125,7 @@ const Home = props => {
                 </Table.Row>
               </Table.Header>
               <Table.Body>
-                {sessions.map((item) => (
+                {[...sessions].reverse().map((item) => (
                   <Table.Row key={item.id}>
                     <Table.Cell maxW="180px" overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">{item.date}</Table.Cell>
                     <Table.Cell>{item.sessionType}</Table.Cell>
