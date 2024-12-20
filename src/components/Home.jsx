@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Tabs, Link, GridItem, Grid, Table, Center } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { GridItem, Grid, Table } from '@chakra-ui/react';
 import Stopwatch from './Stopwatch';
+import { db } from '../db';
 
 const tableData = [
   {
@@ -85,10 +85,29 @@ const tableData = [
 
 
 const Home = props => {
-  const addNewSession = (obj) => {
-    console.log("Hello")
+  const [sessions, setSessions] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      let ses = await db.sessions.toArray();
+      await console.log(ses, "Sessions");
+      setSessions(ses);
+    };
+    getData();
+  }, []);
+
+  const addNewSession = async (obj) => {
     console.log(obj);
+    let id = await db.sessions.add(obj);
+    console.log(id);
+    getAllSessions();
   }
+
+  const getAllSessions = async () => {
+    let ses = await db.sessions.toArray();
+    await console.log(ses, "Sessions");
+    setSessions(ses);
+  };
+
   return (
     <div>
       <Grid height="90vh" templateRows="repeat(8, 2fr)" gap="2">
@@ -100,19 +119,19 @@ const Home = props => {
             <Table.Root size="sm" variant="outline" stickyHeader striped _even={{ backgroundColor: 'red' }}>
               <Table.Header bg="transparent">
                 <Table.Row>
-                  <Table.ColumnHeader >Activity</Table.ColumnHeader>
+                  <Table.ColumnHeader >Date</Table.ColumnHeader>
+                  <Table.ColumnHeader minW="4px">SessionType</Table.ColumnHeader>
                   <Table.ColumnHeader minW="4px">Duration</Table.ColumnHeader>
-                  <Table.ColumnHeader minW="4px">Start</Table.ColumnHeader>
-                  <Table.ColumnHeader minW="4px">End</Table.ColumnHeader>
+                  <Table.ColumnHeader minW="4px">Start Time</Table.ColumnHeader>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
-                {tableData.map((item) => (
+                {sessions.map((item) => (
                   <Table.Row key={item.id}>
-                    <Table.Cell maxW="180px" overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">{item.activity}</Table.Cell>
+                    <Table.Cell maxW="180px" overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">{item.date}</Table.Cell>
+                    <Table.Cell>{item.sessionType}</Table.Cell>
                     <Table.Cell>{item.duration}</Table.Cell>
-                    <Table.Cell>{item.start}</Table.Cell>
-                    <Table.Cell>{item.end}</Table.Cell>
+                    <Table.Cell>{item.startTime}</Table.Cell>
                   </Table.Row>
                 ))}
               </Table.Body>
