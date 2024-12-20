@@ -118,19 +118,19 @@ const Home = props => {
             <Table.Root size="sm" variant="outline" stickyHeader striped _even={{ backgroundColor: 'red' }}>
               <Table.Header bg="transparent">
                 <Table.Row>
-                  <Table.ColumnHeader >Date</Table.ColumnHeader>
-                  <Table.ColumnHeader minW="4px">SessionType</Table.ColumnHeader>
-                  <Table.ColumnHeader minW="4px">Duration</Table.ColumnHeader>
-                  <Table.ColumnHeader minW="4px">Start Time</Table.ColumnHeader>
+                  <Table.ColumnHeader textAlign="center">Date</Table.ColumnHeader>
+                  <Table.ColumnHeader textAlign="center" minW="4px">SessionType</Table.ColumnHeader>
+                  <Table.ColumnHeader textAlign="center" minW="4px">Duration</Table.ColumnHeader>
+                  <Table.ColumnHeader textAlign="center" minW="4px">Start Time</Table.ColumnHeader>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
                 {[...sessions].reverse().map((item) => (
                   <Table.Row key={item.id}>
-                    <Table.Cell maxW="180px" overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">{item.date}</Table.Cell>
-                    <Table.Cell>{item.sessionType}</Table.Cell>
-                    <Table.Cell>{Math.ceil(item.duration/60).toString()+" min"}</Table.Cell>
-                    <Table.Cell>{item.startTime}</Table.Cell>
+                    <Table.Cell textAlign="center" maxW="180px" overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">{item.date}</Table.Cell>
+                    <Table.Cell textAlign="center">{item.sessionType}</Table.Cell>
+                    <Table.Cell textAlign="center">{Math.ceil(item.duration/60).toString()+" min"}</Table.Cell>
+                    <Table.Cell textAlign="center">{item.startTime}</Table.Cell>
                   </Table.Row>
                 ))}
               </Table.Body>
